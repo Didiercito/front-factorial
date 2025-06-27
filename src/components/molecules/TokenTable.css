@@ -1,0 +1,147 @@
+/* src/components/molecules/TokenTable.css */
+.token-analysis {
+  background: white;
+  border: 1px solid #ddd;
+  margin: 20px 0;
+}
+
+.analysis-header {
+  border-bottom: 1px solid #ddd;
+}
+
+.analysis-header h3 {
+  background: #f5f5f5;
+  color: #333;
+  padding: 12px;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.no-tokens {
+  padding: 40px 20px;
+  text-align: center;
+  color: #666;
+}
+
+.code-display {
+  border: 1px solid #ddd;
+  margin: 16px;
+  background: #fafafa;
+}
+
+.code-content {
+  padding: 12px;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 12px;
+  line-height: 1.4;
+  margin: 0;
+  color: #333;
+}
+
+.analysis-table-container {
+  margin: 16px;
+}
+
+.analysis-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+}
+
+.table-header {
+  background: #f5f5f5;
+}
+
+.table-header th {
+  padding: 8px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 13px;
+  border: 1px solid #ddd;
+}
+
+.inicio-row td,
+.total-row td {
+  padding: 6px 8px;
+  text-align: center;
+  border: 1px solid #ddd;
+  font-size: 13px;
+}
+
+.inicio-cell {
+  background: #000;
+  color: white;
+  font-weight: 600;
+}
+
+.total-row {
+  background: #f5f5f5;
+  font-weight: 600;
+}
+
+.total-tokens {
+  text-align: center;
+  margin-top: 8px;
+  font-size: 13px;
+  color: #666;
+  padding: 8px;
+  border-top: 1px solid #ddd;
+}
+
+.detailed-tokens {
+  margin: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #ddd;
+}
+
+.detailed-tokens h4 {
+  color: #333;
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.tokens-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.token-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 6px 4px;
+  border: 1px solid #ddd;
+  font-size: 11px;
+  background: white;
+}
+
+.token-keyword { border-left: 3px solid #666; }
+.token-identifier { border-left: 3px solid #333; }
+.token-number { border-left: 3px solid #000; }
+.token-string { border-left: 3px solid #999; }
+.token-operator,
+.token-symbol { border-left: 3px solid #555; }
+
+.token-value {
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.token-type {
+  font-size: 9px;
+  color: #666;
+}
+
+.token-line {
+  font-size: 8px;
+  color: #999;
+  margin-top: 2px;
+}

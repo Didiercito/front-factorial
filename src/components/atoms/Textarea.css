@@ -1,0 +1,20 @@
+/* src/components/atoms/Textarea.css */
+.textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 13px;
+  line-height: 1.4;
+  resize: vertical;
+  outline: none;
+}
+
+.textarea:focus {
+  border-color: #000;
+}
+
+.textarea::placeholder {
+  color: #999;
+}
