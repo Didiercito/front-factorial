@@ -1,3 +1,4 @@
+/* src/components/organisms/FactorialAnalyzer.css */
 .factorial-analyzer {
   min-height: 100vh;
   background: #f9f9f9;
@@ -76,6 +77,12 @@
 }
 
 .analyze-btn {
+  flex: 2;
+  min-height: 36px;
+  font-size: 14px;
+}
+
+.clear-btn {
   flex: 1;
   min-height: 36px;
   font-size: 14px;
@@ -94,6 +101,38 @@
 .error-message {
   color: #501616;
   font-size: 13px;
+}
+
+.connection-info {
+  margin-top: 8px;
+  padding: 6px 0;
+  border-top: 1px solid #eee;
+}
+
+.connection-info small {
+  color: #666;
+  font-size: 11px;
+}
+
+.connection-info code {
+  background: #f5f5f5;
+  padding: 2px 4px;
+  border-radius: 2px;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+}
+
+.example-hint {
+  margin-top: 12px;
+  padding: 8px;
+  background: #f8f8f0;
+  border: 1px solid #e0e0a0;
+  border-radius: 4px;
+}
+
+.example-hint p {
+  margin: 0;
+  font-size: 12px;
+  color: #666;
 }
 
 .results-section {
@@ -128,6 +167,7 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Header */
 .analyzer-header {
   text-align: center;
   margin-bottom: 30px;
@@ -156,6 +196,7 @@
   font-weight: 400;
 }
 
+/* Main Content */
 .analyzer-content {
   display: grid;
   grid-template-columns: 1fr 1fr;

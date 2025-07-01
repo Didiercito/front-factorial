@@ -145,3 +145,51 @@
   color: #999;
   margin-top: 2px;
 }
+
+/* Estadísticas adicionales */
+.token-stats {
+  margin: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #ddd;
+}
+
+.token-stats h4 {
+  color: #333;
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 8px;
+}
+
+.stat-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 8px;
+  background: #f9f9f9;
+  border: 1px solid #eee;
+  font-size: 12px;
+}
+
+.stat-item.error {
+  background: #fef2f2;
+  border-color: #fecaca;
+}
+
+.stat-label {
+  color: #666;
+}
+
+.stat-value {
+  font-weight: 600;
+  color: #333;
+}
+
+.stat-item.error .stat-value {
+  color: #dc2626;
+}

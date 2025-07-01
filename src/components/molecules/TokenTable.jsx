@@ -1,17 +1,28 @@
+// src/components/molecules/TokenTable.jsx
+import React from 'react';
 import './TokenTable.css';
 
-const TokenTable = ({ tokens }) => {
-  const stats = tokens.reduce((acc, token) => {
-    acc[token.type] = (acc[token.type] || 0) + 1;
-    return acc;
-  }, {});
+const TokenTable = ({ tokens, originalCode }) => {
+  if (!tokens || tokens.length === 0) {
+    return (
+      <div className="token-analysis">
+        <div className="analysis-header">
+          <h3>Analizador Léxico</h3>
+        </div>
+        <div className="no-tokens">
+          <p>No hay tokens para analizar. Ingresa código para comenzar.</p>
+        </div>
+      </div>
+    );
+  }
 
+  // Contar tokens por tipo
   const categories = {
     'PR': tokens.filter(t => t.type === 'KEYWORD').length,
     'ID': tokens.filter(t => t.type === 'IDENTIFIER').length,
     'Números': tokens.filter(t => t.type === 'NUMBER').length,
     'Símbolos': tokens.filter(t => ['SYMBOL', 'OPERATOR'].includes(t.type)).length,
-    'Error': 0 
+    'Error': tokens.filter(t => t.type === 'ERROR').length || 0
   };
 
   const totalTokens = tokens.length;
@@ -19,22 +30,17 @@ const TokenTable = ({ tokens }) => {
   return (
     <div className="token-analysis">
       <div className="analysis-header">
-        <h3>Analizador Léxico, si tiene la siguiente estructura</h3>
+        <h3>Analizador Léxico</h3>
       </div>
 
-      <div className="code-display">
-        <pre className="code-content">
-{`def factorial(n):
-    if n <= 1:
-        return 1
-    else:
-        return n * factorial(n - 1)
+      {/* Código analizado */}
+      {originalCode && (
+        <div className="code-display">
+          <pre className="code-content">{originalCode}</pre>
+        </div>
+      )}
 
-x = 5
-print("El factorial de", x, "es", factorial(x))`}
-        </pre>
-      </div>
-
+      {/* Tabla de análisis como en el PDF */}
       <div className="analysis-table-container">
         <table className="analysis-table">
           <thead>
@@ -72,6 +78,7 @@ print("El factorial de", x, "es", factorial(x))`}
         </div>
       </div>
 
+      {/* Lista detallada de tokens */}
       <div className="detailed-tokens">
         <h4>Detalle de Tokens:</h4>
         <div className="tokens-grid">
@@ -82,6 +89,35 @@ print("El factorial de", x, "es", factorial(x))`}
               <span className="token-line">L{token.line}</span>
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* Estadísticas adicionales */}
+      <div className="token-stats">
+        <h4>Estadísticas:</h4>
+        <div className="stats-grid">
+          <div className="stat-item">
+            <span className="stat-label">Keywords:</span>
+            <span className="stat-value">{categories.PR}</span>
+          </div>
+          <div className="stat-item">
+            <span className="stat-label">Identificadores:</span>
+            <span className="stat-value">{categories.ID}</span>
+          </div>
+          <div className="stat-item">
+            <span className="stat-label">Números:</span>
+            <span className="stat-value">{categories.Números}</span>
+          </div>
+          <div className="stat-item">
+            <span className="stat-label">Símbolos/Operadores:</span>
+            <span className="stat-value">{categories.Símbolos}</span>
+          </div>
+          {categories.Error > 0 && (
+            <div className="stat-item error">
+              <span className="stat-label">Errores:</span>
+              <span className="stat-value">{categories.Error}</span>
+            </div>
+          )}
         </div>
       </div>
     </div>

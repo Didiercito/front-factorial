@@ -9,7 +9,7 @@ const AnalysisResults = ({ syntax, semantic }) => {
       <div className="syntax-analysis">
         <h3 className="analysis-title">Análisis sintáctico</h3>
         <p className="analysis-description">
-          Debe validar la estructura de la función, condicionales, llamadas recursivas y expresiones aritméticas.
+          Validación de la estructura del código Python: funciones, condicionales y sintaxis general.
         </p>
         
         <div className={`syntax-status ${syntax.valid ? 'syntax-valid' : 'syntax-invalid'}`}>
@@ -35,8 +35,10 @@ const AnalysisResults = ({ syntax, semantic }) => {
           <ul className="structure-list">
             {syntax.valid && (
               <>
-                <li>✓ Estructura sintáctica válida</li>
-                <li>✓ Análisis completado correctamente</li>
+                <li>✓ Definiciones de función válidas</li>
+                <li>✓ Estructuras condicionales correctas</li>
+                <li>✓ Paréntesis balanceados</li>
+                <li>✓ Sintaxis Python válida</li>
               </>
             )}
           </ul>
@@ -47,14 +49,20 @@ const AnalysisResults = ({ syntax, semantic }) => {
       <div className="semantic-analysis">
         <h3 className="analysis-title">Análisis semántico</h3>
         
-        <div className="semantic-checks">
-          {semantic.checks.map((check, index) => (
-            <div key={index} className={`semantic-check ${check.passed ? 'check-passed' : 'check-failed'}`}>
-              <span className="check-icon">{check.passed ? '✅' : '❌'}</span>
-              <span className="check-description">{check.description}</span>
+        {/* Errores Semánticos */}
+        {semantic.checks && semantic.checks.length > 0 && (
+          <div className="semantic-errors">
+            <h4>Errores semánticos encontrados:</h4>
+            <div className="error-list">
+              {semantic.checks.map((error, index) => (
+                <div key={index} className="semantic-error-item">
+                  <span className="error-icon">❌</span>
+                  <span className="error-message">{error.message || error}</span>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </div>
+        )}
 
         {/* Tabla de Símbolos */}
         <div className="symbol-table">
@@ -68,32 +76,54 @@ const AnalysisResults = ({ syntax, semantic }) => {
               </tr>
             </thead>
             <tbody>
-              {semantic.symbolTable.map((symbol, index) => (
-                <tr key={index}>
-                  <td className="symbol-name">{symbol.name}</td>
-                  <td className="symbol-type">{symbol.type}</td>
-                  <td className="symbol-scope">
-                    {symbol.type === 'function' ? 'global' : 
-                     symbol.name === 'n' ? 'local (factorial)' : 'global'}
-                  </td>
+              {semantic.symbolTable && semantic.symbolTable.length > 0 ? (
+                semantic.symbolTable.map((symbol, index) => (
+                  <tr key={index}>
+                    <td className="symbol-name">{symbol.name}</td>
+                    <td className="symbol-type">{symbol.type}</td>
+                    <td className="symbol-scope">{symbol.scope || 'global'}</td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="3" className="no-symbols">No hay símbolos detectados</td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
         </div>
 
-        {/* Verificaciones específicas */}
-        <div className="semantic-verifications">
-          <h4>Verificaciones específicas:</h4>
-          <div className="verification-grid">
-            {semantic.checks.map((check, index) => (
-              <div key={index} className="verification-item">
-                <span className="verification-label">{check.description}:</span>
-                <span className="verification-value">
-                  {check.passed ? '✅ Correcto' : '❌ Error'}
-                </span>
+        {/* Estadísticas de Variables y Funciones */}
+        <div className="semantic-stats">
+          <h4>Estadísticas del análisis:</h4>
+          <div className="stats-grid">
+            {semantic.symbolTable && semantic.symbolTable.map((item, index) => (
+              <div key={index} className="stat-item">
+                <span className="stat-label">{item.name}:</span>
+                <span className="stat-value">{item.value}</span>
               </div>
             ))}
+          </div>
+        </div>
+
+        {/* Resumen del análisis */}
+        <div className="semantic-summary">
+          <h4>Resumen del análisis semántico:</h4>
+          <div className="summary-content">
+            {semantic.checks && semantic.checks.length > 0 ? (
+              <div className="summary-item error">
+                <span className="summary-icon">⚠️</span>
+                <span className="summary-text">
+                  Se encontraron {semantic.checks.length} errores semánticos. 
+                  Principalmente variables usadas sin declaración previa.
+                </span>
+              </div>
+            ) : (
+              <div className="summary-item success">
+                <span className="summary-icon">✅</span>
+                <span className="summary-text">No se encontraron errores semánticos.</span>
+              </div>
+            )}
           </div>
         </div>
 
